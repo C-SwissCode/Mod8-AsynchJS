@@ -40,14 +40,31 @@
    });
  };
 
- getIDs.then(IDs => {
-   console.log(IDs)
-   return getRecipe(IDs[2]);
- })
- .then(recipe => {
-   console.log(recipe);
-   return getRelated('Caleb');
- })
- .then(recipe => {
-   console.log(recipe);
- });
+//  getIDs.then(IDs => {
+//    console.log(IDs)
+//    return getRecipe(IDs[2]);
+//  })
+//  .then(recipe => {
+//    console.log(recipe);
+//    return getRelated('Caleb');
+//  })
+//  .then(recipe => {
+//    console.log(recipe);
+//  });
+
+/******************
+ * Async Await
+ */
+
+async function getRecipesAW() {
+  const IDs = await getIDs;
+  console.log(IDs);
+  const recipe = await getRecipe(IDs[2]);
+  console.log(recipe);
+  const publisher = await getRelated('Caleb');
+  console.log(publisher);
+
+  return recipe;
+};
+
+getRecipesAW().then(result => console.log(`${result} is the best recipe ever!!`));
