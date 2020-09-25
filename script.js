@@ -106,11 +106,11 @@ async function getWeatherAW(woeid) {
     let tempHighF = tomorrow.max_temp * (9 / 5) + 32;
     let tempMinF = tomorrow.min_temp * (9 / 5) + 32;
     console.log(`Weather tomorrow in ${data.title} includes a high of ${tempHighF} and a low of ${tempMinF}!`)
-    return data;
+    //return data;
   } catch (error){
     console.log(error);
   };
 };
 
 getWeatherAW(2487956);
-// getWeatherAW(44418).then(dataResult => console.log(dataResult));0
+// getWeatherAW(44418).then(dataResult => console.log(dataResult));
