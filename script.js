@@ -73,20 +73,44 @@
  * AJAX calls with Fetch and Promises
  */
 
-function getWeather(woeid) {
-  fetch(`https://cors-anywhere.herokuapp.com/www.metaweather.com/api/location/${woeid}`)
-    .then(result => {
-      console.log(result);
-      return result.json();
-    })
-    .then(data => {
-      console.log(data);
-      const today = data.consolidated_weather[0];
-      let tempHighF = today.max_temp * (9 / 5) + 32;
-      let tempLowF = today.min_temp * (9 / 5) + 32;
-      console.log(`Today in ${data.title} the high will be ${tempHighF} and the low is ${tempLowF}, I can't wait for fall!`);
-    });
+// function getWeather(woeid) {
+//   fetch(`https://cors-anywhere.herokuapp.com/www.metaweather.com/api/location/${woeid}`)
+//     .then(result => {
+//       console.log(result);
+//       return result.json();
+//     })
+//     .then(data => {
+//       console.log(data);
+//       const today = data.consolidated_weather[0];
+//       let tempHighF = today.max_temp * (9 / 5) + 32;
+//       let tempLowF = today.min_temp * (9 / 5) + 32;
+//       console.log(`Today in ${data.title} the high will be ${tempHighF} and the low is ${tempLowF}, I can't wait for fall!`);
+//     });
+// };
+
+// getWeather(2487956);
+// getWeather(44418);
+
+
+/***********************
+ * AJAX calls with Fetch and Async/Await
+ */
+
+async function getWeatherAW(woeid) {
+  try {
+    const result = await fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}`);
+    const data = await result.json();
+    console.log(data);
+    const tomorrow = await data.consolidated_weather[1];
+
+    let tempHighF = tomorrow.max_temp * (9 / 5) + 32;
+    let tempMinF = tomorrow.min_temp * (9 / 5) + 32;
+    console.log(`Weather tomorrow in ${data.title} includes a high of ${tempHighF} and a low of ${tempMinF}!`)
+    return data;
+  } catch (error){
+    console.log(error);
+  };
 };
 
-getWeather(2487956);
-getWeather(44418);
+getWeatherAW(2487956);
+// getWeatherAW(44418).then(dataResult => console.log(dataResult));0
