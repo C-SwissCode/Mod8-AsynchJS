@@ -100,17 +100,16 @@ async function getWeatherAW(woeid) {
   try {
     const result = await fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}`);
     const data = await result.json();
-    console.log(data);
     const tomorrow = await data.consolidated_weather[1];
 
     let tempHighF = tomorrow.max_temp * (9 / 5) + 32;
     let tempMinF = tomorrow.min_temp * (9 / 5) + 32;
     console.log(`Weather tomorrow in ${data.title} includes a high of ${tempHighF} and a low of ${tempMinF}!`)
-    //return data;
+    return data;
   } catch (error){
     console.log(error);
   };
 };
 
 getWeatherAW(2487956);
-// getWeatherAW(44418).then(dataResult => console.log(dataResult));
+getWeatherAW(44418).then(dataResult => console.log(dataResult));
